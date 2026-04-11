@@ -48,7 +48,7 @@ def _truncate(text: str, limit: int = FIELD_MAX) -> str:
     return text[: limit - 4] + "\n…"
 
 
-def _build_digest_embed(digest: dict) -> dict:
+def _build_digest_embed(digest: dict, pr_url: str | None = None) -> dict:
     """Build a Discord embed from a PM digest."""
     portfolio = digest.get("portfolio_status", "unknown")
     repo_statuses = digest.get("repo_statuses", {})
@@ -94,7 +94,7 @@ def _build_digest_embed(digest: dict) -> dict:
             {"name": "📋 Next Up", "value": _truncate(next_up_field), "inline": False},
             {"name": "🤔 Needs Your Call", "value": _truncate(decision_field), "inline": False},
         ],
-        "footer": {"text": f"Full report: output/digests/ | {digest.get('timestamp', '')}"},
+        "footer": {"text": f"Full report: {pr_url or 'output/digests/'} | {digest.get('timestamp', '')}"},
     }
     return embed
 
@@ -121,10 +121,10 @@ async def _send_webhook(url: str, payload: dict) -> None:
     raise RuntimeError(f"Discord webhook failed after {MAX_RETRIES} retries: {last_exc}")
 
 
-async def send_digest(digest: dict) -> None:
+async def send_digest(digest: dict, pr_url: str | None = None) -> None:
     """Format and send the PM digest embed to the digests channel."""
     url = _get_webhook_url("digests")
-    embed = _build_digest_embed(digest)
+    embed = _build_digest_embed(digest, pr_url=pr_url)
     payload = {"embeds": [embed]}
     logger.info("Sending digest to Discord")
     await _send_webhook(url, payload)

@@ -3,5 +3,4 @@
 __pycache__/
 *.pyc
 output/reports/
-output/digests/
 output/hop.db

@@ -156,6 +156,59 @@ def _save_digest_file(data: dict) -> Path:
     return path
 
 
+def _push_digest_pr(digest_path: Path) -> str | None:
+    """Commit the digest file, push to a branch, and open a PR via gh CLI."""
+    import subprocess
+
+    ts = datetime.now(timezone.utc).strftime("%Y-%m-%d-%H%M")
+    branch = f"hop/digest-{ts}"
+    # Determine the base branch from git
+    try:
+        base_result = subprocess.run(
+            ["git", "rev-parse", "--abbrev-ref", "HEAD"],
+            cwd=BASE_DIR, capture_output=True, text=True, check=True,
+        )
+        main_branch = base_result.stdout.strip()
+    except subprocess.CalledProcessError:
+        main_branch = "main"
+    repo_url = "neutralworking/head-of-product"
+
+    try:
+        # Create branch from current HEAD
+        subprocess.run(["git", "checkout", "-b", branch], cwd=BASE_DIR, check=True, capture_output=True)
+        # Stage the digest file
+        subprocess.run(["git", "add", str(digest_path)], cwd=BASE_DIR, check=True, capture_output=True)
+        # Commit
+        subprocess.run(
+            ["git", "commit", "-m", f"[HoP] PM Digest {ts}"],
+            cwd=BASE_DIR, check=True, capture_output=True,
+        )
+        # Push
+        subprocess.run(
+            ["git", "push", "origin", branch],
+            cwd=BASE_DIR, check=True, capture_output=True,
+        )
+        # Open PR
+        result = subprocess.run(
+            ["gh", "pr", "create",
+             "--repo", repo_url,
+             "--base", main_branch,
+             "--head", branch,
+             "--title", f"[HoP] PM Digest {ts}",
+             "--body", f"Auto-generated PM digest.\n\nFull report: `{digest_path.name}`"],
+            cwd=BASE_DIR, check=True, capture_output=True, text=True,
+        )
+        pr_url = result.stdout.strip()
+        # Switch back to main branch
+        subprocess.run(["git", "checkout", main_branch], cwd=BASE_DIR, capture_output=True)
+        return pr_url
+    except subprocess.CalledProcessError as exc:
+        logger.error("Git/PR operation failed: %s\n%s", exc, exc.stderr)
+        # Try to get back to main branch
+        subprocess.run(["git", "checkout", main_branch], cwd=BASE_DIR, capture_output=True)
+        raise
+
+
 async def produce_digest(dry_run: bool = False) -> dict | None:
     """Produce the PM digest from latest scans."""
     repos = _load_repos()
@@ -196,10 +249,18 @@ async def produce_digest(dry_run: bool = False) -> dict | None:
     save_digest(digest)
     logger.info("Saved digest: %s", path)
 
-    # Send to Discord
+    # Push digest to GitHub and open PR
+    pr_url = None
+    try:
+        pr_url = _push_digest_pr(path)
+        logger.info("Opened digest PR: %s", pr_url)
+    except Exception as exc:
+        logger.error("Failed to push digest PR: %s", exc)
+
+    # Send to Discord (include PR link)
     try:
         from lib.discord_notifier import send_digest as send_discord_digest
-        await send_discord_digest(digest)
+        await send_discord_digest(digest, pr_url=pr_url)
         logger.info("Digest sent to Discord")
     except Exception as exc:
         logger.error("Failed to send digest to Discord: %s", exc)
