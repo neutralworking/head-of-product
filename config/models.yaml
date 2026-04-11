@@ -1,0 +1,18 @@
+ollama:
+  base_url: "http://localhost:11434"
+  model: "mistral:7b"
+  tasks:
+    - repo_scan
+    - todo_extraction
+    - diff_summary
+
+claude:
+  model: "claude-sonnet-4-20250514"
+  tasks:
+    - pm_synthesis
+    - priority_ranking
+    - fix_proposal
+    - ambiguous_judgment
+
+routing:
+  default: ollama

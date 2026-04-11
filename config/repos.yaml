@@ -1,0 +1,42 @@
+repos:
+  roguelike:
+    github: "owner/fm-roguelike"
+    default_branch: main
+    project_type: "game"
+    priority_weight: 2
+    scan:
+      commits: true
+      issues: true
+      prs: true
+      tests: true
+      todos: true
+      deploy_health: true
+    autofix: true
+
+  ecom:
+    github: "owner/ecom"
+    default_branch: main
+    project_type: "e-commerce"
+    priority_weight: 3
+    scan:
+      commits: true
+      issues: true
+      prs: true
+      tests: true
+      todos: true
+      deploy_health: true
+    autofix: true
+
+  nw:
+    github: "owner/neutral-working"
+    default_branch: main
+    project_type: "portfolio"
+    priority_weight: 1
+    scan:
+      commits: true
+      issues: true
+      prs: true
+      tests: false
+      todos: true
+      deploy_health: true
+    autofix: true

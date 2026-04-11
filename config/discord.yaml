@@ -1,0 +1,12 @@
+channels:
+  digests:
+    webhook_url_env: "DISCORD_WEBHOOK_DIGESTS"
+  alerts:
+    webhook_url_env: "DISCORD_WEBHOOK_ALERTS"
+
+routing:
+  digest: digests
+  repo_status_change: alerts
+  ci_failure: alerts
+  autofix_pr_opened: digests
+  needs_decision: digests

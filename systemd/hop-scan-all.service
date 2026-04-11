@@ -1,0 +1,12 @@
+[Unit]
+Description=HoP repo scan (all repos)
+After=network-online.target ollama.service
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=hop
+WorkingDirectory=/opt/head-of-product
+EnvironmentFile=/opt/head-of-product/.env
+ExecStart=/opt/head-of-product/.venv/bin/python -m agents.repo_analyst --all
+TimeoutStartSec=600

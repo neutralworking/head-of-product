@@ -1,0 +1,12 @@
+[Unit]
+Description=HoP PM digest
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=hop
+WorkingDirectory=/opt/head-of-product
+EnvironmentFile=/opt/head-of-product/.env
+ExecStart=/opt/head-of-product/.venv/bin/python -m agents.pm_aggregator
+TimeoutStartSec=300

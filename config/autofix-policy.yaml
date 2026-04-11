@@ -1,0 +1,17 @@
+allowed:
+  - lint_format
+  - import_sort
+  - dead_link_docs
+  - type_stub_cleanup
+  - test_snapshot_refresh
+
+blocked:
+  - dependency_upgrade
+  - architecture_change
+  - feature_addition
+  - infra_change
+  - env_config_change
+  - db_migration
+
+approval_mode: pr
+branch_prefix: "hop/autofix/"
