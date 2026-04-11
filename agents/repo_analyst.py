@@ -93,39 +93,39 @@ def _build_prompt(repo_data: RepoData, repo_config: dict, previous_scan: dict | 
     autofix_allowed = _load_autofix_allowed()
     deploy_status = _build_deploy_status(repo_data.workflow_runs)
 
-    # Trim large payloads to avoid blowing context limits
+    # Trim large payloads to fit within Ollama's 4096 context window
     commits_trimmed = [
-        {"sha": c.get("sha", "")[:8], "message": c.get("commit", {}).get("message", "")[:200], "date": c.get("commit", {}).get("author", {}).get("date", "")}
-        for c in repo_data.commits[:50]
+        {"sha": c.get("sha", "")[:8], "message": c.get("commit", {}).get("message", "").split("\n")[0][:80]}
+        for c in repo_data.commits[:15]
     ]
     commits_7d_count = len(repo_data.commits)
     commits_30d_count = len(repo_data.commits_30d)
     issues_trimmed = [
-        {"number": i.get("number"), "title": i.get("title", "")[:150], "labels": [l.get("name", "") for l in i.get("labels", [])], "created_at": i.get("created_at", "")}
-        for i in repo_data.issues[:30]
+        {"number": i.get("number"), "title": i.get("title", "")[:80], "labels": [l.get("name", "") for l in i.get("labels", [])]}
+        for i in repo_data.issues[:10]
     ]
     prs_trimmed = [
-        {"number": p.get("number"), "title": p.get("title", "")[:150], "user": p.get("user", {}).get("login", ""), "created_at": p.get("created_at", ""), "updated_at": p.get("updated_at", ""), "draft": p.get("draft", False)}
-        for p in repo_data.prs[:30]
+        {"number": p.get("number"), "title": p.get("title", "")[:80], "draft": p.get("draft", False)}
+        for p in repo_data.prs[:10]
     ]
     todos_trimmed = [
-        {"file": t.get("path", ""), "text": t.get("name", "")[:200]}
-        for t in repo_data.todos[:50]
+        {"file": t.get("path", ""), "text": t.get("name", "")[:80]}
+        for t in repo_data.todos[:10]
     ]
 
     replacements = {
         "{{repo_alias}}": repo_data.alias,
         "{{repo_url}}": repo_config["github"],
         "{{project_type}}": repo_config.get("project_type", "unknown"),
-        "{{commits_json}}": json.dumps(commits_trimmed, indent=2),
+        "{{commits_json}}": json.dumps(commits_trimmed),
         "{{commits_7d_count}}": str(commits_7d_count),
         "{{commits_30d_count}}": str(commits_30d_count),
-        "{{issues_json}}": json.dumps(issues_trimmed, indent=2),
-        "{{prs_json}}": json.dumps(prs_trimmed, indent=2),
+        "{{issues_json}}": json.dumps(issues_trimmed),
+        "{{prs_json}}": json.dumps(prs_trimmed),
         "{{test_output}}": "Not available",
-        "{{todos_json}}": json.dumps(todos_trimmed, indent=2),
-        "{{deploy_status}}": json.dumps(deploy_status, indent=2),
-        "{{previous_scan_json}}": json.dumps(previous_scan, indent=2) if previous_scan else "null",
+        "{{todos_json}}": json.dumps(todos_trimmed),
+        "{{deploy_status}}": json.dumps(deploy_status),
+        "{{previous_scan_json}}": json.dumps(previous_scan) if previous_scan else "null",
         "{{autofix_allowed}}": json.dumps(autofix_allowed),
     }
 

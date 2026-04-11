@@ -5,7 +5,7 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
-User=hop
+User=root
 WorkingDirectory=/opt/head-of-product
 EnvironmentFile=/opt/head-of-product/.env
 ExecStart=/opt/head-of-product/.venv/bin/python -m agents.pm_aggregator

@@ -14,7 +14,7 @@ load_dotenv()
 logger = logging.getLogger("hop.router")
 
 CONFIG_PATH = Path(__file__).resolve().parent.parent / "config" / "models.yaml"
-DEFAULT_TIMEOUT = 120.0
+DEFAULT_TIMEOUT = 3600.0
 MAX_RETRIES = 3
 RETRY_BACKOFF = 2.0
 
@@ -40,26 +40,37 @@ async def _call_ollama(prompt: str, system: str, config: dict) -> str:
         "model": model,
         "prompt": prompt,
         "system": system,
-        "stream": False,
+        "stream": True,
+        "options": {
+            "num_ctx": config["ollama"].get("num_ctx", 4096),
+        },
+        "keep_alive": "30m",
     }
 
     last_exc: Exception | None = None
-    async with httpx.AsyncClient() as client:
-        for attempt in range(MAX_RETRIES):
-            try:
-                resp = await client.post(url, json=payload, timeout=DEFAULT_TIMEOUT)
-                resp.raise_for_status()
-                data = resp.json()
-                return data.get("response", "")
-            except (httpx.HTTPStatusError, httpx.TransportError) as exc:
-                last_exc = exc
-                wait = RETRY_BACKOFF * (2 ** attempt)
-                logger.warning("Ollama request failed (attempt %d/%d), retrying in %.1fs: %s", attempt + 1, MAX_RETRIES, wait, exc)
-                await asyncio.sleep(wait)
+    for attempt in range(MAX_RETRIES):
+        try:
+            async with httpx.AsyncClient() as client:
+                async with client.stream("POST", url, json=payload, timeout=DEFAULT_TIMEOUT) as resp:
+                    resp.raise_for_status()
+                    output = ""
+                    async for line in resp.aiter_lines():
+                        import json as _json
+                        data = _json.loads(line)
+                        output += data.get("response", "")
+                        if data.get("done"):
+                            break
+                    return output
+        except (httpx.HTTPStatusError, httpx.TransportError) as exc:
+            last_exc = exc
+            wait = RETRY_BACKOFF * (2 ** attempt)
+            logger.warning("Ollama request failed (attempt %d/%d), retrying in %.1fs: %s", attempt + 1, MAX_RETRIES, wait, exc)
+            await asyncio.sleep(wait)
     raise RuntimeError(f"Ollama request failed after {MAX_RETRIES} retries: {last_exc}")
 
 
 async def _call_claude(prompt: str, system: str, config: dict) -> str:
+    """Call Claude via Anthropic API (requires ANTHROPIC_API_KEY)."""
     model = config["claude"]["model"]
     token = os.environ.get("ANTHROPIC_API_KEY", "")
     if not token:
@@ -86,7 +97,6 @@ async def _call_claude(prompt: str, system: str, config: dict) -> str:
                 resp = await client.post(url, json=payload, headers=headers, timeout=DEFAULT_TIMEOUT)
                 resp.raise_for_status()
                 data = resp.json()
-                # Extract text from the first content block
                 content = data.get("content", [])
                 if content and isinstance(content, list):
                     return content[0].get("text", "")

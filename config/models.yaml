@@ -1,6 +1,7 @@
 ollama:
   base_url: "http://localhost:11434"
-  model: "mistral-small"
+  model: "mistral:7b"
+  num_ctx: 4096
   tasks:
     - repo_scan
     - todo_extraction
@@ -8,11 +9,7 @@ ollama:
 
 claude:
   model: "claude-sonnet-4-20250514"
-  tasks:
-    - pm_synthesis
-    - priority_ranking
-    - fix_proposal
-    - ambiguous_judgment
+  tasks: []
 
 routing:
   default: ollama
