@@ -1,6 +1,6 @@
 ollama:
   base_url: "http://localhost:11434"
-  model: "mistral:7b"
+  model: "mistral-small"
   tasks:
     - repo_scan
     - todo_extraction

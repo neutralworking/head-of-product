@@ -1,6 +1,20 @@
 repos:
-  roguelike:
-    github: "owner/fm-roguelike"
+  soft-power:
+    github: "neutralworking/soft-power"
+    default_branch: main
+    project_type: "visual-novel"
+    priority_weight: 3
+    scan:
+      commits: true
+      issues: true
+      prs: true
+      tests: false
+      todos: true
+      deploy_health: true
+    autofix: false
+
+  director:
+    github: "neutralworking/director"
     default_branch: main
     project_type: "game"
     priority_weight: 2
@@ -8,15 +22,15 @@ repos:
       commits: true
       issues: true
       prs: true
-      tests: true
+      tests: false
       todos: true
       deploy_health: true
-    autofix: true
+    autofix: false
 
-  ecom:
-    github: "owner/ecom"
+  chief-scout:
+    github: "neutralworking/chief-scout"
     default_branch: main
-    project_type: "e-commerce"
+    project_type: "tool"
     priority_weight: 3
     scan:
       commits: true
@@ -27,9 +41,79 @@ repos:
       deploy_health: true
     autofix: true
 
-  nw:
-    github: "owner/neutral-working"
+  kb:
+    github: "neutralworking/kb"
     default_branch: main
+    project_type: "web-app"
+    priority_weight: 2
+    scan:
+      commits: true
+      issues: true
+      prs: true
+      tests: true
+      todos: true
+      deploy_health: true
+    autofix: true
+
+  wellness-session:
+    github: "neutralworking/wellness-session"
+    default_branch: main
+    project_type: "web-app"
+    priority_weight: 2
+    scan:
+      commits: true
+      issues: true
+      prs: true
+      tests: true
+      todos: true
+      deploy_health: true
+    autofix: true
+
+  language-tidbits:
+    github: "neutralworking/language-tidbits-engine"
+    default_branch: main
+    project_type: "engine"
+    priority_weight: 1
+    scan:
+      commits: true
+      issues: true
+      prs: true
+      tests: true
+      todos: true
+      deploy_health: true
+    autofix: true
+
+  brain-levelup:
+    github: "neutralworking/brain-levelup-engine"
+    default_branch: main
+    project_type: "engine"
+    priority_weight: 1
+    scan:
+      commits: true
+      issues: true
+      prs: true
+      tests: false
+      todos: true
+      deploy_health: true
+    autofix: false
+
+  crumble:
+    github: "neutralworking/crumble"
+    default_branch: main
+    project_type: "web-app"
+    priority_weight: 1
+    scan:
+      commits: true
+      issues: true
+      prs: true
+      tests: true
+      todos: true
+      deploy_health: true
+    autofix: true
+
+  neutralworking:
+    github: "neutralworking/neutralworking"
+    default_branch: master
     project_type: "portfolio"
     priority_weight: 1
     scan:
@@ -39,4 +123,18 @@ repos:
       tests: false
       todos: true
       deploy_health: true
-    autofix: true
+    autofix: false
+
+  head-of-product:
+    github: "neutralworking/head-of-product"
+    default_branch: main
+    project_type: "orchestrator"
+    priority_weight: 1
+    scan:
+      commits: true
+      issues: true
+      prs: true
+      tests: false
+      todos: true
+      deploy_health: false
+    autofix: false

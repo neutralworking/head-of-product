@@ -61,9 +61,9 @@ async def _call_ollama(prompt: str, system: str, config: dict) -> str:
 
 async def _call_claude(prompt: str, system: str, config: dict) -> str:
     model = config["claude"]["model"]
-    token = os.environ.get("CLAUDE_CODE_OAUTH_TOKEN", "")
+    token = os.environ.get("ANTHROPIC_API_KEY", "")
     if not token:
-        raise RuntimeError("CLAUDE_CODE_OAUTH_TOKEN not set")
+        raise RuntimeError("ANTHROPIC_API_KEY not set")
 
     url = "https://api.anthropic.com/v1/messages"
     headers = {
