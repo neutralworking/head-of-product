@@ -1,0 +1,110 @@
+{
+  "portfolio_status": "yellow",
+  "summary": "Portfolio shows mixed health with two high-priority projects at risk. Director remains completely stalled with no commits, while chief-scout has failing deployments despite active development. Five projects show healthy acceleration, but CI/CD visibility gaps create deployment uncertainty across the portfolio.",
+  "repo_statuses": {
+    "soft-power": {
+      "status": "healthy",
+      "one_liner": "Accelerating development with 26 commits this week, but needs CI/CD setup"
+    },
+    "director": {
+      "status": "at-risk",
+      "one_liner": "Completely stalled with zero commits in 30 days"
+    },
+    "chief-scout": {
+      "status": "at-risk",
+      "one_liner": "Active development but failing deployments blocking releases"
+    },
+    "kb": {
+      "status": "healthy",
+      "one_liner": "Stable with working deployments, just needs dependency updates"
+    },
+    "wellness-session": {
+      "status": "healthy",
+      "one_liner": "Recently activated with successful deployments"
+    },
+    "language-tidbits": {
+      "status": "healthy",
+      "one_liner": "Strong development pace with 16 commits this week"
+    },
+    "brain-levelup": {
+      "status": "healthy",
+      "one_liner": "Consistent progress with accelerating commits"
+    },
+    "crumble": {
+      "status": "stale",
+      "one_liner": "Zero activity for 30+ days despite working CI/CD"
+    },
+    "neutralworking": {
+      "status": "stale",
+      "one_liner": "Minimal activity with only one commit in 30 days"
+    },
+    "head-of-product": {
+      "status": "healthy",
+      "one_liner": "Active development but has blocking TODOs"
+    }
+  },
+  "cross_project_ranking": [
+    {
+      "rank": 1,
+      "repo": "chief-scout",
+      "action": "Fix failing Daily Project Update workflows",
+      "reason": "High-priority tool with broken deployments blocking functionality",
+      "urgency": "high"
+    },
+    {
+      "rank": 2,
+      "repo": "director",
+      "action": "Resume development by addressing open issues",
+      "reason": "Game project completely stalled for 30 days with no progress",
+      "urgency": "high"
+    },
+    {
+      "rank": 3,
+      "repo": "soft-power",
+      "action": "Set up CI/CD pipeline for deployment monitoring",
+      "reason": "High-priority visual novel with strong momentum needs stability assurance",
+      "urgency": "medium"
+    },
+    {
+      "rank": 4,
+      "repo": "head-of-product",
+      "action": "Resolve TODOs in lib/github_client.py and prompts/repo_analyst.md",
+      "reason": "Blocking issues in the orchestrator affecting portfolio management",
+      "urgency": "medium"
+    },
+    {
+      "rank": 5,
+      "repo": "crumble",
+      "action": "Evaluate project continuation or archival",
+      "reason": "Web app abandoned for 30+ days despite working infrastructure",
+      "urgency": "low"
+    }
+  ],
+  "needs_decision": [
+    {
+      "repo": "crumble",
+      "question": "Should this project be archived or revived?",
+      "options": [
+        "Archive as completed",
+        "Allocate development time",
+        "Keep monitoring"
+      ],
+      "recommendation": "Archive as completed - working CI/CD suggests it may be feature-complete"
+    }
+  ],
+  "trends": {
+    "accelerating": [
+      "soft-power",
+      "language-tidbits",
+      "brain-levelup",
+      "head-of-product",
+      "wellness-session"
+    ],
+    "stalling": [
+      "director",
+      "crumble",
+      "neutralworking"
+    ]
+  },
+  "timestamp": "2026-04-11T20:38:35.873715+00:00"
+}
