@@ -4,8 +4,6 @@ import asyncio
 import json
 import logging
 import os
-import subprocess
-import tempfile
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -38,12 +36,12 @@ FIX_COMMANDS: dict[str, list[str]] = {
 
 def _load_repos() -> dict:
     with open(REPOS_CONFIG) as f:
-        return yaml.safe_load(f).get("repos", {})
+        return (yaml.safe_load(f) or {}).get("repos", {})
 
 
 def _load_autofix_policy() -> dict:
     with open(AUTOFIX_CONFIG) as f:
-        return yaml.safe_load(f)
+        return yaml.safe_load(f) or {}
 
 
 def _is_allowed(fix_type: str, policy: dict) -> bool:

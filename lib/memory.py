@@ -14,8 +14,10 @@ _local = threading.local()
 def _get_conn() -> sqlite3.Connection:
     if not hasattr(_local, "conn") or _local.conn is None:
         DB_PATH.parent.mkdir(parents=True, exist_ok=True)
-        _local.conn = sqlite3.connect(str(DB_PATH))
+        _local.conn = sqlite3.connect(str(DB_PATH), timeout=10)
         _local.conn.row_factory = sqlite3.Row
+        _local.conn.execute("PRAGMA journal_mode=WAL")
+        _local.conn.execute("PRAGMA busy_timeout=5000")
         _init_tables(_local.conn)
     return _local.conn
 

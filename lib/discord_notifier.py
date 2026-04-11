@@ -7,6 +7,9 @@ from pathlib import Path
 
 import httpx
 import yaml
+from dotenv import load_dotenv
+
+load_dotenv()
 
 logger = logging.getLogger("hop.discord")
 
@@ -18,7 +21,7 @@ RETRY_BACKOFF = 2.0
 
 def _load_config() -> dict:
     with open(CONFIG_PATH) as f:
-        return yaml.safe_load(f)
+        return yaml.safe_load(f) or {}
 
 
 def _get_webhook_url(channel_key: str) -> str:
@@ -33,6 +36,16 @@ def _get_webhook_url(channel_key: str) -> str:
 
 def _status_emoji(status: str) -> str:
     return {"green": "🟢", "yellow": "🟡", "red": "🔴", "healthy": "🟢", "stale": "🟡", "at-risk": "🔴"}.get(status, "⚪")
+
+
+FIELD_MAX = 1024
+
+
+def _truncate(text: str, limit: int = FIELD_MAX) -> str:
+    """Truncate text to fit Discord's field value limit."""
+    if len(text) <= limit:
+        return text
+    return text[: limit - 4] + "\n…"
 
 
 def _build_digest_embed(digest: dict) -> dict:
@@ -58,6 +71,12 @@ def _build_digest_embed(digest: dict) -> dict:
         priority_lines.append(f"**{rank}.** [{repo}] {action}")
     priority_field = "\n".join(priority_lines) if priority_lines else "None"
 
+    # Next up
+    next_up_field = "\n".join(
+        f"**{i.get('rank', '?')}.** [{i.get('repo', '?')}] {i.get('action', '')}"
+        for i in ranking[3:6]
+    ) or "—"
+
     # Needs decision
     decision_lines = []
     for d in decisions[:3]:
@@ -70,10 +89,10 @@ def _build_digest_embed(digest: dict) -> dict:
         "title": "Head of Product — Daily Digest",
         "color": {"green": 0x2ECC71, "yellow": 0xF1C40F, "red": 0xE74C3C}.get(portfolio, 0x95A5A6),
         "fields": [
-            {"name": f"{_status_emoji(portfolio)} Portfolio Status", "value": status_field, "inline": False},
-            {"name": "🎯 Top Priority", "value": priority_field, "inline": False},
-            {"name": "📋 Next Up", "value": "\n".join(f"**{i.get('rank', '?')}.** [{i.get('repo', '?')}] {i.get('action', '')}" for i in ranking[3:6]) or "—", "inline": False},
-            {"name": "🤔 Needs Your Call", "value": decision_field, "inline": False},
+            {"name": f"{_status_emoji(portfolio)} Portfolio Status", "value": _truncate(status_field), "inline": False},
+            {"name": "🎯 Top Priority", "value": _truncate(priority_field), "inline": False},
+            {"name": "📋 Next Up", "value": _truncate(next_up_field), "inline": False},
+            {"name": "🤔 Needs Your Call", "value": _truncate(decision_field), "inline": False},
         ],
         "footer": {"text": f"Full report: output/digests/ | {digest.get('timestamp', '')}"},
     }

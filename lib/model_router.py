@@ -7,6 +7,9 @@ from pathlib import Path
 
 import httpx
 import yaml
+from dotenv import load_dotenv
+
+load_dotenv()
 
 logger = logging.getLogger("hop.router")
 
@@ -18,7 +21,7 @@ RETRY_BACKOFF = 2.0
 
 def _load_config() -> dict:
     with open(CONFIG_PATH) as f:
-        return yaml.safe_load(f)
+        return yaml.safe_load(f) or {}
 
 
 def _resolve_backend(task: str, config: dict) -> str:

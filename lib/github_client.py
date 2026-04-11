@@ -7,8 +7,11 @@ from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
 
 import httpx
+from dotenv import load_dotenv
 
 from lib.memory import cache_todos, get_cached_todos
+
+load_dotenv()
 
 logger = logging.getLogger("hop.github")
 
@@ -22,6 +25,7 @@ RETRY_BACKOFF = 2.0
 class RepoData:
     alias: str
     commits: list[dict] = field(default_factory=list)
+    commits_30d: list[dict] = field(default_factory=list)
     issues: list[dict] = field(default_factory=list)
     prs: list[dict] = field(default_factory=list)
     workflow_runs: list[dict] = field(default_factory=list)
@@ -41,7 +45,7 @@ def _headers() -> dict[str, str]:
 
 
 async def _get(client: httpx.AsyncClient, url: str, params: dict | None = None) -> list | dict:
-    """GET with retry + backoff."""
+    """GET with retry + backoff. Handles 403 rate limits via Retry-After header."""
     last_exc: Exception | None = None
     for attempt in range(MAX_RETRIES):
         try:
@@ -50,9 +54,19 @@ async def _get(client: httpx.AsyncClient, url: str, params: dict | None = None) 
             return resp.json()
         except (httpx.HTTPStatusError, httpx.TransportError) as exc:
             last_exc = exc
-            if isinstance(exc, httpx.HTTPStatusError) and exc.response.status_code < 500:
-                logger.warning("GitHub API %s returned %s: %s", url, exc.response.status_code, exc.response.text[:200])
-                raise
+            if isinstance(exc, httpx.HTTPStatusError):
+                status = exc.response.status_code
+                # Rate limit — retry after the header-specified delay
+                if status in (403, 429):
+                    retry_after = exc.response.headers.get("Retry-After")
+                    wait = float(retry_after) if retry_after else RETRY_BACKOFF * (2 ** attempt)
+                    logger.warning("GitHub rate limit (%d) on %s, waiting %.1fs (attempt %d/%d)", status, url, wait, attempt + 1, MAX_RETRIES)
+                    await asyncio.sleep(wait)
+                    continue
+                # Other 4xx — not retryable
+                if status < 500:
+                    logger.warning("GitHub API %s returned %s: %s", url, status, exc.response.text[:200])
+                    raise
             wait = RETRY_BACKOFF * (2 ** attempt)
             logger.warning("GitHub API request failed (attempt %d/%d), retrying in %.1fs: %s", attempt + 1, MAX_RETRIES, wait, exc)
             await asyncio.sleep(wait)
@@ -110,7 +124,8 @@ async def collect_repo_data(repo_config: dict, alias: str) -> RepoData:
     async with httpx.AsyncClient(headers=_headers()) as client:
         tasks = {}
         if scan.get("commits", True):
-            tasks["commits"] = _fetch_commits(client, owner_repo)
+            tasks["commits"] = _fetch_commits(client, owner_repo, since_days=7)
+            tasks["commits_30d"] = _fetch_commits(client, owner_repo, since_days=30)
         if scan.get("issues", True):
             tasks["issues"] = _fetch_issues(client, owner_repo)
         if scan.get("prs", True):
@@ -134,6 +149,7 @@ async def collect_repo_data(repo_config: dict, alias: str) -> RepoData:
     return RepoData(
         alias=alias,
         commits=results.get("commits", []),
+        commits_30d=results.get("commits_30d", []),
         issues=results.get("issues", []),
         prs=results.get("prs", []),
         workflow_runs=results.get("workflow_runs", []),

@@ -4,6 +4,7 @@ You are a product owner analyzing a single software repository.
 - Repo: {{repo_alias}} ({{repo_url}})
 - Project type: {{project_type}}
 - Recent commits (last 7 days): {{commits_json}}
+- Commit counts: {{commits_7d_count}} in last 7 days, {{commits_30d_count}} in last 30 days
 - Open issues: {{issues_json}}
 - Open PRs: {{prs_json}}
 - Test results (if available): {{test_output}}

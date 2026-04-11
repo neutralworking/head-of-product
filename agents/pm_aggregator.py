@@ -30,7 +30,7 @@ DIGESTS_DIR = BASE_DIR / "output" / "digests"
 
 def _load_repos() -> dict:
     with open(REPOS_CONFIG) as f:
-        return yaml.safe_load(f).get("repos", {})
+        return (yaml.safe_load(f) or {}).get("repos", {})
 
 
 def _load_prompt_template() -> str:
@@ -119,9 +119,19 @@ def _parse_llm_json(raw: str) -> dict | None:
 
 
 def _validate_digest(data: dict) -> bool:
-    """Basic schema validation for PM digest."""
+    """Validate PM digest output against expected schema."""
     required = {"portfolio_status", "cross_project_ranking"}
-    return required.issubset(data.keys()) and data["portfolio_status"] in ("green", "yellow", "red")
+    if not required.issubset(data.keys()):
+        return False
+    if data["portfolio_status"] not in ("green", "yellow", "red"):
+        return False
+    if not isinstance(data["cross_project_ranking"], list):
+        return False
+    if not isinstance(data.get("needs_decision", []), list):
+        return False
+    if not isinstance(data.get("repo_statuses", {}), dict):
+        return False
+    return True
 
 
 def _save_digest_file(data: dict) -> Path:

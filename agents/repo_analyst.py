@@ -33,12 +33,12 @@ REPORTS_DIR = BASE_DIR / "output" / "reports"
 
 def _load_repos() -> dict:
     with open(REPOS_CONFIG) as f:
-        return yaml.safe_load(f).get("repos", {})
+        return (yaml.safe_load(f) or {}).get("repos", {})
 
 
 def _load_autofix_allowed() -> list[str]:
     with open(AUTOFIX_CONFIG) as f:
-        return yaml.safe_load(f).get("allowed", [])
+        return (yaml.safe_load(f) or {}).get("allowed", [])
 
 
 def _load_prompt_template() -> str:
@@ -98,6 +98,8 @@ def _build_prompt(repo_data: RepoData, repo_config: dict, previous_scan: dict | 
         {"sha": c.get("sha", "")[:8], "message": c.get("commit", {}).get("message", "")[:200], "date": c.get("commit", {}).get("author", {}).get("date", "")}
         for c in repo_data.commits[:50]
     ]
+    commits_7d_count = len(repo_data.commits)
+    commits_30d_count = len(repo_data.commits_30d)
     issues_trimmed = [
         {"number": i.get("number"), "title": i.get("title", "")[:150], "labels": [l.get("name", "") for l in i.get("labels", [])], "created_at": i.get("created_at", "")}
         for i in repo_data.issues[:30]
@@ -116,6 +118,8 @@ def _build_prompt(repo_data: RepoData, repo_config: dict, previous_scan: dict | 
         "{{repo_url}}": repo_config["github"],
         "{{project_type}}": repo_config.get("project_type", "unknown"),
         "{{commits_json}}": json.dumps(commits_trimmed, indent=2),
+        "{{commits_7d_count}}": str(commits_7d_count),
+        "{{commits_30d_count}}": str(commits_30d_count),
         "{{issues_json}}": json.dumps(issues_trimmed, indent=2),
         "{{prs_json}}": json.dumps(prs_trimmed, indent=2),
         "{{test_output}}": "Not available",
@@ -160,9 +164,28 @@ def _parse_llm_json(raw: str) -> dict | None:
 
 
 def _validate_scan(data: dict) -> bool:
-    """Basic schema validation for repo scan output."""
-    required = {"repo", "timestamp", "status"}
-    return required.issubset(data.keys()) and data["status"] in ("healthy", "stale", "at-risk")
+    """Validate repo scan output against expected schema."""
+    required_top = {"repo", "timestamp", "status"}
+    if not required_top.issubset(data.keys()):
+        return False
+    if data["status"] not in ("healthy", "stale", "at-risk"):
+        return False
+    # Validate nested structures exist and have correct types
+    momentum = data.get("momentum")
+    if momentum is not None and not isinstance(momentum, dict):
+        return False
+    deploy = data.get("deploy_health")
+    if deploy is not None and not isinstance(deploy, dict):
+        return False
+    if not isinstance(data.get("risks", []), list):
+        return False
+    if not isinstance(data.get("todos", []), list):
+        return False
+    if not isinstance(data.get("autofix_candidates", []), list):
+        return False
+    if not isinstance(data.get("suggested_priorities", []), list):
+        return False
+    return True
 
 
 def _save_report(alias: str, data: dict) -> Path:
