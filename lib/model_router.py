@@ -25,8 +25,8 @@ def _load_config() -> dict:
 
 
 def _resolve_backend(task: str, config: dict) -> str:
-    """Return 'ollama' or 'claude' for a given task."""
-    for backend in ("ollama", "claude"):
+    """Return 'ollama', 'claude', or 'openai' for a given task."""
+    for backend in ("ollama", "claude", "openai"):
         if task in config.get(backend, {}).get("tasks", []):
             return backend
     return config.get("routing", {}).get("default", "ollama")
@@ -112,6 +112,48 @@ async def _call_claude(prompt: str, system: str, config: dict) -> str:
     raise RuntimeError(f"Claude request failed after {MAX_RETRIES} retries: {last_exc}")
 
 
+async def _call_openai(prompt: str, system: str, config: dict) -> str:
+    """Call OpenAI API (requires OPENAI_API_KEY)."""
+    model = config["openai"]["model"]
+    token = os.environ.get("OPENAI_API_KEY", "")
+    if not token:
+        raise RuntimeError("OPENAI_API_KEY not set")
+
+    url = "https://api.openai.com/v1/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {token}",
+        "Content-Type": "application/json",
+    }
+    messages = []
+    if system:
+        messages.append({"role": "system", "content": system})
+    messages.append({"role": "user", "content": prompt})
+
+    payload = {
+        "model": model,
+        "messages": messages,
+        "max_tokens": 4096,
+    }
+
+    last_exc: Exception | None = None
+    async with httpx.AsyncClient() as client:
+        for attempt in range(MAX_RETRIES):
+            try:
+                resp = await client.post(url, json=payload, headers=headers, timeout=120.0)
+                resp.raise_for_status()
+                data = resp.json()
+                return data["choices"][0]["message"]["content"]
+            except (httpx.HTTPStatusError, httpx.TransportError) as exc:
+                last_exc = exc
+                if isinstance(exc, httpx.HTTPStatusError) and exc.response.status_code < 500:
+                    logger.error("OpenAI API error %s: %s", exc.response.status_code, exc.response.text[:300])
+                    raise
+                wait = RETRY_BACKOFF * (2 ** attempt)
+                logger.warning("OpenAI request failed (attempt %d/%d), retrying in %.1fs: %s", attempt + 1, MAX_RETRIES, wait, exc)
+                await asyncio.sleep(wait)
+    raise RuntimeError(f"OpenAI request failed after {MAX_RETRIES} retries: {last_exc}")
+
+
 async def route(task: str, prompt: str, system: str = "") -> str:
     """Route a prompt to the appropriate model backend based on task type."""
     config = _load_config()
@@ -120,5 +162,7 @@ async def route(task: str, prompt: str, system: str = "") -> str:
 
     if backend == "claude":
         return await _call_claude(prompt, system, config)
+    elif backend == "openai":
+        return await _call_openai(prompt, system, config)
     else:
         return await _call_ollama(prompt, system, config)

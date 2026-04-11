@@ -80,23 +80,22 @@ def _build_prompt(scans: dict[str, dict], repos: dict) -> str:
     metadata = _build_projects_metadata(repos)
     projects_list = _build_projects_list(repos)
 
-    # Aggressively trim scan data to fit Ollama's 4096 context window
+    # Include full scan data — GPT-4o handles large context fine
     trimmed_scans = {}
     for alias, scan in scans.items():
-        top_risk = scan.get("risks", [{}])[:1]
-        top_priority = scan.get("suggested_priorities", [{}])[:1]
         trimmed_scans[alias] = {
-            "s": scan.get("status", "?"),
-            "m": scan.get("momentum", {}).get("trend", "?"),
-            "ci": scan.get("deploy_health", {}).get("status", "?"),
-            "risk": top_risk[0].get("description", "")[:60] if top_risk else "",
-            "priority": top_priority[0].get("action", "")[:60] if top_priority else "",
+            "status": scan.get("status", "unknown"),
+            "momentum": scan.get("momentum", {}),
+            "deploy_health": scan.get("deploy_health", {}),
+            "risks": scan.get("risks", [])[:5],
+            "suggested_priorities": scan.get("suggested_priorities", [])[:5],
+            "autofix_candidates": scan.get("autofix_candidates", []),
         }
 
     replacements = {
-        "{{all_repo_scans_json}}": json.dumps(trimmed_scans),
-        "{{previous_digest_json}}": "null",
-        "{{projects_metadata_json}}": json.dumps([{"alias": a, "weight": c.get("priority_weight", 1)} for a, c in repos.items()]),
+        "{{all_repo_scans_json}}": json.dumps(trimmed_scans, indent=2),
+        "{{previous_digest_json}}": json.dumps(previous_digest, indent=2) if previous_digest else "null",
+        "{{projects_metadata_json}}": json.dumps(metadata, indent=2),
         "{{current_date}}": datetime.now(timezone.utc).strftime("%Y-%m-%d"),
         "{{projects_list}}": projects_list,
     }

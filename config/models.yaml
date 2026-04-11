@@ -7,9 +7,16 @@ ollama:
     - todo_extraction
     - diff_summary
 
+openai:
+  model: "gpt-4o"
+  tasks: []
+
 claude:
   model: "claude-sonnet-4-20250514"
-  tasks: []
+  tasks:
+    - pm_synthesis
+    - priority_ranking
+    - ambiguous_judgment
 
 routing:
   default: ollama
