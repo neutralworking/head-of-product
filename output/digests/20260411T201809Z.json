@@ -1,0 +1,54 @@
+{
+  "portfolio_status": "yellow",
+  "repo_statuses": {
+    "soft-power": "accelerating | healthy",
+    "director": "stalled | at-risk",
+    "chief-scout": "decelerating | at-risk",
+    "kb": "accelerating | healthy",
+    "wellness-session": "stale | stale",
+    "language-tidbits": "accelerating | healthy",
+    "brain-levelup": "accelerating | healthy",
+    "crumble": "lack of recent activity may indicate project is no longer active | stale",
+    "neutralworking": "stale | accelerating",
+    "head-of-product": "healthy | accelerating"
+  },
+  "cross_project_ranking": [
+    {
+      "rank": 1,
+      "repo": "director",
+      "action": "Revisit open issues and address them",
+      "reason": "No new code added in the last week with high user impact"
+    },
+    {
+      "rank": 2,
+      "repo": "chief-scout",
+      "action": "Investigate and fix the issues causing test failures",
+      "reason": "Tests are still failing with development velocity impact"
+    },
+    {
+      "rank": 3,
+      "repo": "soft-power",
+      "action": "Enable CI/CD pipeline to monitor deploy status",
+      "reason": "Possible instability due to unknown deploy status"
+    },
+    {
+      "rank": 4,
+      "repo": "crumble",
+      "action": "Reach out to project maintainers to gauge activity and engagement",
+      "reason": "Lack of recent activity may indicate project is no longer active"
+    },
+    {
+      "rank": 5,
+      "repo": "kb",
+      "action": "Review and merge the pending dependency updates",
+      "reason": "Updating dependencies will improve code health"
+    }
+  ],
+  "needs_decision": [
+    {
+      "repo": "head-of-product",
+      "question": "Resolve linting issues in the codebase"
+    }
+  ],
+  "timestamp": "2026-04-11T20:18:09.095040+00:00"
+}
