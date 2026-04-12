@@ -1,0 +1,112 @@
+{
+  "portfolio_status": "yellow",
+  "summary": "Portfolio health remains mixed with persistent deployment issues. Chief-scout continues to fail deployments while director stays completely stalled. However, most active projects show strong acceleration, with head-of-product resolving some blocking TODOs and soft-power maintaining rapid development pace.",
+  "repo_statuses": {
+    "soft-power": {
+      "status": "healthy",
+      "one_liner": "Strong acceleration continues with 26 commits this week, still needs CI/CD"
+    },
+    "director": {
+      "status": "at-risk",
+      "one_liner": "Remains completely stalled with zero commits for 30+ days"
+    },
+    "chief-scout": {
+      "status": "at-risk",
+      "one_liner": "Development slowing down with persistent failing deployments"
+    },
+    "kb": {
+      "status": "healthy",
+      "one_liner": "Stable with working deployments, needs dependency updates"
+    },
+    "wellness-session": {
+      "status": "healthy",
+      "one_liner": "Accelerating development with 2 commits this week and working deployments"
+    },
+    "language-tidbits": {
+      "status": "healthy",
+      "one_liner": "Exceptional development pace with 16 commits this week"
+    },
+    "brain-levelup": {
+      "status": "healthy",
+      "one_liner": "Consistent acceleration with 4 commits this week"
+    },
+    "crumble": {
+      "status": "stale",
+      "one_liner": "Remains dormant with no activity for 30+ days"
+    },
+    "neutralworking": {
+      "status": "stale",
+      "one_liner": "Minimal activity with only 1 commit in 30 days"
+    },
+    "head-of-product": {
+      "status": "healthy",
+      "one_liner": "Active development with 11 commits this week, still has blocking TODOs"
+    }
+  },
+  "cross_project_ranking": [
+    {
+      "rank": 1,
+      "repo": "chief-scout",
+      "action": "Fix failing Daily Project Update workflows immediately",
+      "reason": "High-priority tool with broken deployments preventing functionality and momentum declining",
+      "urgency": "high"
+    },
+    {
+      "rank": 2,
+      "repo": "soft-power",
+      "action": "Set up CI/CD pipeline for deployment monitoring",
+      "reason": "Highest priority project with excellent momentum needs stability assurance",
+      "urgency": "high"
+    },
+    {
+      "rank": 3,
+      "repo": "director",
+      "action": "Resume development by addressing open issues",
+      "reason": "Game project completely stalled for 30+ days with no signs of recovery",
+      "urgency": "medium"
+    },
+    {
+      "rank": 4,
+      "repo": "head-of-product",
+      "action": "Complete remaining TODOs in lib/github_client.py and prompts/repo_analyst.md",
+      "reason": "Portfolio orchestrator still has blocking issues despite recent progress",
+      "urgency": "medium"
+    },
+    {
+      "rank": 5,
+      "repo": "wellness-session",
+      "action": "Address session data persistence and React Native reconciliation",
+      "reason": "Capitalize on accelerating momentum to deliver key functionality improvements",
+      "urgency": "low"
+    }
+  ],
+  "needs_decision": [
+    {
+      "repo": "crumble",
+      "question": "Should this dormant project be archived or revived?",
+      "options": [
+        "Archive as completed",
+        "Allocate development resources",
+        "Continue monitoring"
+      ],
+      "recommendation": "Archive as completed - 30+ days of inactivity with working CI/CD suggests completion"
+    }
+  ],
+  "trends": {
+    "accelerating": [
+      "soft-power",
+      "wellness-session",
+      "language-tidbits",
+      "brain-levelup",
+      "head-of-product",
+      "kb"
+    ],
+    "stalling": [
+      "chief-scout",
+      "director",
+      "crumble",
+      "neutralworking"
+    ]
+  },
+  "timestamp": "2026-04-12T07:00:14.230900+00:00"
+}
