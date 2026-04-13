@@ -1,0 +1,112 @@
+{
+  "portfolio_status": "yellow",
+  "summary": "Portfolio shows improving momentum with chief-scout recovering from critical state and kb returning from dormancy. However, director remains completely stalled with zero activity for 30+ days, and multiple high-priority projects lack deployment infrastructure.",
+  "repo_statuses": {
+    "soft-power": {
+      "status": "healthy",
+      "one_liner": "Sustained high velocity with 26 commits this week, still needs CI/CD setup"
+    },
+    "director": {
+      "status": "at-risk",
+      "one_liner": "Completely stalled for 30+ days, critical game project needs revival"
+    },
+    "chief-scout": {
+      "status": "at-risk",
+      "one_liner": "Still broken with failing workflows but showing improved activity"
+    },
+    "kb": {
+      "status": "stale",
+      "one_liner": "No activity for 30 days despite being functional"
+    },
+    "wellness-session": {
+      "status": "healthy",
+      "one_liner": "Consistent acceleration with working deployments"
+    },
+    "language-tidbits": {
+      "status": "healthy",
+      "one_liner": "Exceptional pace with 28 commits this week, needs CI/CD"
+    },
+    "brain-levelup": {
+      "status": "healthy",
+      "one_liner": "Steady acceleration with 4 commits this week"
+    },
+    "crumble": {
+      "status": "at-risk",
+      "one_liner": "Dormant for 30+ days - needs decision on future"
+    },
+    "neutralworking": {
+      "status": "healthy",
+      "one_liner": "Minimal but consistent activity with 3 commits"
+    },
+    "head-of-product": {
+      "status": "healthy",
+      "one_liner": "Strong momentum with 11 commits, has blocking TODOs"
+    }
+  },
+  "cross_project_ranking": [
+    {
+      "rank": 1,
+      "repo": "chief-scout",
+      "action": "Fix failing test suite (test_red_card, test_injury_sub, test_extra_time) and workflow issues",
+      "reason": "High-priority development tool with broken core functionality preventing team productivity",
+      "urgency": "high"
+    },
+    {
+      "rank": 2,
+      "repo": "soft-power",
+      "action": "Set up CI/CD pipeline for deployment monitoring",
+      "reason": "Top priority visual novel with exceptional momentum needs stability infrastructure",
+      "urgency": "high"
+    },
+    {
+      "rank": 3,
+      "repo": "director",
+      "action": "Restart development by addressing open issues or make archive decision",
+      "reason": "High-priority game project completely abandoned - needs immediate revival or closure",
+      "urgency": "medium"
+    },
+    {
+      "rank": 4,
+      "repo": "head-of-product",
+      "action": "Complete blocking TODOs in lib/github_client.py and prompts/repo_analyst.md",
+      "reason": "Portfolio orchestrator improvements needed to maintain development velocity",
+      "urgency": "medium"
+    },
+    {
+      "rank": 5,
+      "repo": "language-tidbits",
+      "action": "Set up CI/CD pipeline to support exceptional development pace",
+      "reason": "Fast-moving engine project needs deployment infrastructure",
+      "urgency": "low"
+    }
+  ],
+  "needs_decision": [
+    {
+      "repo": "crumble",
+      "question": "Should this dormant web-app be archived or revived?",
+      "options": [
+        "Archive as completed",
+        "Allocate development resources",
+        "Continue monitoring"
+      ],
+      "recommendation": "Archive as completed - 30+ days of inactivity with working CI/CD suggests completion"
+    }
+  ],
+  "trends": {
+    "accelerating": [
+      "soft-power",
+      "wellness-session",
+      "language-tidbits",
+      "brain-levelup",
+      "neutralworking",
+      "head-of-product"
+    ],
+    "stalling": [
+      "director",
+      "chief-scout",
+      "kb",
+      "crumble"
+    ]
+  },
+  "timestamp": "2026-04-13T07:00:20.181013+00:00"
+}
