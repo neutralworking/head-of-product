@@ -1,0 +1,120 @@
+{
+  "portfolio_status": "yellow",
+  "summary": "Portfolio remains yellow but shows mixed signals: chief-scout critical test failures persist while soft-power development completely stalled for the second consecutive week. Several projects demonstrate positive momentum, but deploy infrastructure gaps and technical debt continue to create systemic risks across high-priority initiatives.",
+  "repo_statuses": {
+    "soft-power": {
+      "status": "at-risk",
+      "one_liner": "Still completely stalled for second week running despite high priority - critical momentum loss"
+    },
+    "director": {
+      "status": "at-risk",
+      "one_liner": "Remains abandoned with zero activity for 30+ days, ready for archival decision"
+    },
+    "chief-scout": {
+      "status": "at-risk",
+      "one_liner": "Sustained high activity but core test failures still blocking functionality - workflow issues persist"
+    },
+    "kb": {
+      "status": "healthy",
+      "one_liner": "Minimal steady progress with reliable CI/CD and npm audit opportunities"
+    },
+    "wellness-session": {
+      "status": "healthy",
+      "one_liner": "Positive momentum maintained with working deployments, addressing session persistence features"
+    },
+    "language-tidbits": {
+      "status": "healthy",
+      "one_liner": "Exceptional velocity at 21 commits this week but still lacks critical CI/CD infrastructure"
+    },
+    "brain-levelup": {
+      "status": "stale",
+      "one_liner": "Development stalled this week after showing promise, needs deployment monitoring setup"
+    },
+    "crumble": {
+      "status": "at-risk",
+      "one_liner": "Continued inactivity despite working CI/CD suggests project abandonment"
+    },
+    "neutralworking": {
+      "status": "at-risk",
+      "one_liner": "Steady development continues but deployment failure still blocks portfolio visibility"
+    },
+    "head-of-product": {
+      "status": "healthy",
+      "one_liner": "Strong acceleration with 11 commits, high-severity TODOs still need resolution"
+    }
+  },
+  "cross_project_ranking": [
+    {
+      "rank": 1,
+      "repo": "soft-power",
+      "action": "Emergency investigation into development stall - restore momentum or pivot resource allocation",
+      "reason": "Highest priority visual novel has been completely stalled for two weeks after strong momentum - critical revenue project regression",
+      "urgency": "high"
+    },
+    {
+      "rank": 2,
+      "repo": "chief-scout",
+      "action": "Fix blocking test failures (test_red_card, test_injury_sub, test_extra_time) and restore workflow reliability",
+      "reason": "High-priority tool with sustained development but broken core functionality blocking team productivity",
+      "urgency": "high"
+    },
+    {
+      "rank": 3,
+      "repo": "language-tidbits",
+      "action": "Implement CI/CD pipeline immediately to protect exceptional development velocity",
+      "reason": "Peak performance engine at 21 commits/week needs deployment safety net to prevent regression introduction",
+      "urgency": "medium"
+    },
+    {
+      "rank": 4,
+      "repo": "neutralworking",
+      "action": "Fix 'deploy to coolify' workflow to restore portfolio site functionality",
+      "reason": "Portfolio deployment failure continues blocking professional presence and project visibility",
+      "urgency": "medium"
+    },
+    {
+      "rank": 5,
+      "repo": "head-of-product",
+      "action": "Resolve high-severity TODOs in lib/github_client.py and prompts/repo_analyst.md",
+      "reason": "Orchestration tool TODOs may be blocking workflow efficiency improvements across all projects",
+      "urgency": "low"
+    }
+  ],
+  "needs_decision": [
+    {
+      "repo": "director",
+      "question": "Should this completely stalled game project be formally archived?",
+      "options": [
+        "Archive as cancelled project",
+        "Allocate dedicated development time for revival"
+      ],
+      "recommendation": "Archive as cancelled - zero activity for 30+ days indicates clear project abandonment"
+    },
+    {
+      "repo": "crumble",
+      "question": "Should this dormant web-app be archived given extended inactivity?",
+      "options": [
+        "Archive as completed",
+        "Continue monitoring for potential revival"
+      ],
+      "recommendation": "Archive as completed - extended inactivity with working CI/CD suggests natural project completion"
+    }
+  ],
+  "trends": {
+    "accelerating": [
+      "wellness-session",
+      "language-tidbits",
+      "head-of-product"
+    ],
+    "stalling": [
+      "soft-power",
+      "director",
+      "chief-scout",
+      "kb",
+      "brain-levelup",
+      "crumble",
+      "neutralworking"
+    ]
+  },
+  "timestamp": "2026-04-17T07:00:18.969985+00:00"
+}
