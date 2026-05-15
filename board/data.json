@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-15T10:55:00Z",
+  "generated_at": "2026-05-15T13:00:00Z",
   "projects": [
     {
       "name": "Chief Scout",
@@ -33,7 +33,7 @@
       "repo": "kickoff-clash",
       "tier": "next",
       "last_touched": null,
-      "next_step": "Stand up Steam wishlist page (cheapest first revenue move). V1 = full run to World Cup, Balatro-parity minus Challenges.",
+      "next_step": "Build the core run loop playable + enjoyable end-to-end (start → World Cup). Polish + Steam listing deferred.",
       "blocker": null,
       "revenue_status": "path"
     },
@@ -53,6 +53,15 @@
       "last_touched": null,
       "next_step": "Write the episode-one pilot. Confirm publish surface (Substack vs. Royal Road) before drafting.",
       "blocker": null,
+      "revenue_status": "path"
+    },
+    {
+      "name": "Language Tidbits",
+      "repo": "language-tidbits-engine",
+      "tier": "next",
+      "last_touched": null,
+      "next_step": "Unparked 2026-05-15. Audit n8n reliability; port one Short end-to-end as proof of pipeline",
+      "blocker": "n8n uptime check",
       "revenue_status": "path"
     },
     {

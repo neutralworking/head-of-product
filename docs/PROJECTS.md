@@ -30,7 +30,7 @@ Legend for empty cells: `—` means none / unknown / not applicable. `?` means H
 
 | Name | Repo | Tier | Done | Monetisation | Last touched | Next step | Blocker | Source | Revenue status |
 |---|---|---|---|---|---|---|---|---|---|
-| Kickoff Clash | `kickoff-clash` | next | Full run playable from start to World Cup. Feature parity with current Balatro (minus Challenges). | Steam paid ($10–15, Balatro analog). Itch demo + Steam wishlist page is the cheapest first revenue move on the portfolio. | ? | Stand up Steam wishlist page; map gap to v1 | — | GitHub | path |
+| Kickoff Clash | `kickoff-clash` | next | Full game playable AND enjoyable end-to-end (run start → World Cup). Polish (UI, cards, depth, music) comes after the loop works. | Steam paid ($10–15, Balatro analog). Steam wishlist page **deferred** until the loop is enjoyable — no premature listing. | ? | Get the core run loop playable + enjoyable | Gameplay loop | GitHub | path |
 | NW portfolio | `neutralworking` | next | Multi-project homepage live. | Lead gen for fractional PO / courses / templates. Decide what before launch. | ? | Decide lead-gen pillar before going live | Pillar choice | GitHub | path |
 | The Trap | iCloud + Todoist | next | Episode-one pilot written. | Substack serial / Royal Road / self-publish. | ? | Confirm publish surface for the pilot (Substack vs. Royal Road) | — | iCloud + Todoist | path |
 
@@ -38,21 +38,30 @@ Legend for empty cells: `—` means none / unknown / not applicable. `?` means H
 
 | Name | Repo | Tier | Done | Monetisation | Last touched | Next step | Blocker | Source | Revenue status |
 |---|---|---|---|---|---|---|---|---|---|
-| n8n-platform | `n8n-platform` | later | Reliable enough for Tidbits/Levelup. | None direct. Underwrites passive plays. | ? | Confirm uptime for Tidbits revival | ? | GitHub | none (enabler) |
+| Language Tidbits | `language-tidbits-engine` | next | First Short ported through n8n; one upload live with affiliate. | **YouTube Shorts + affiliate. Closest to passive on portfolio.** | ? | Audit n8n reliability for Tidbits; port one Short end-to-end as proof | n8n uptime check | GitHub | path |
+| n8n-platform | `n8n-platform` | later | Reliable enough for Tidbits/Levelup. | None direct. Underwrites passive plays. | ? | Confirm uptime is good enough for Tidbits revival | ? | GitHub | none (enabler) |
 | Crumble.cz | `crumble` | later | Done with his wife. | Out of charter. | ? | None from HoP | Out of charter | GitHub | — |
 
 ---
 
-## Parked
+## Rested — formally on the bench, no work until unparked
+
+Rested 2026-05-15 by Luke. Different from "parked" in that we're not pretending they're a few weeks from action.
+
+| Name | Repo | Monetisation | Reason | Source |
+|---|---|---|---|---|
+| Director of Football | `director-of-football` | Steam, long-term | Not the income lever; rested to free mental slot | GitHub |
+| Unreal Albion | `unreal-albion` | Steam | Shelved per charter; formal rest | GitHub |
+| Brain Levelup | `brain-levelup-engine` | YouTube Shorts | Strictly downstream of Tidbits — rest until Tidbits has shipped one | GitHub |
+
+---
+
+## Parked — kept but not in focus
 
 | Name | Repo | Done | Monetisation | Last touched | Next step | Blocker | Source | Revenue status |
 |---|---|---|---|---|---|---|---|---|
-| Black Coffee | `black-coffee` | — | None. Joy candidate. | ? | None | — | GitHub | none |
-| Director of Football | `director-of-football` | — | Steam, long-term. | ? | None | Not in focus | GitHub | path |
-| Unreal Albion | `unreal-albion` | — | Steam. Shelved. | ? | None | Shelved | GitHub | path |
-| Language Tidbits | `language-tidbits-engine` | — | **YouTube Shorts + affiliate. Closest to passive on portfolio. n8n healthier now — high-leverage revival candidate.** | ? | Audit revival cost vs. expected output | n8n stability check | GitHub | path |
-| Brain Levelup | `brain-levelup-engine` | — | YouTube Shorts. Port target after Tidbits. | ? | None until Tidbits revives | Tidbits first | GitHub | path |
-| Shadow Session | `wellness-session` | — | Paid iOS app. | ? | None | Not in focus | GitHub | path |
+| Shadow Session | `wellness-session` | — | Paid iOS app. | ? | None | Not in focus (kept per Luke 2026-05-15) | GitHub | path |
+| Black Coffee | `black-coffee` | — | None. Joy candidate. | ? | None | Joy slot — confirm keep/kill | GitHub | none |
 | Life Archive | `life-archive` | — | None. Personal. | ? | Hands off (per charter) | — | GitHub | none |
 
 ---
