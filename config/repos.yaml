@@ -124,3 +124,73 @@ repos:
       todos: true
       deploy_health: false
     autofix: false
+
+  kickoff-clash:
+    github: "neutralworking/kickoff-clash"
+    default_branch: main
+    project_type: "game"
+    priority_weight: 2
+    scan:
+      commits: true
+      issues: true
+      prs: true
+      tests: false
+      todos: true
+      deploy_health: false
+    autofix: false
+
+  n8n-platform:
+    github: "neutralworking/n8n-platform"
+    default_branch: main
+    project_type: "infra"
+    priority_weight: 1
+    scan:
+      commits: true
+      issues: true
+      prs: true
+      tests: false
+      todos: true
+      deploy_health: true
+    autofix: false
+
+  black-coffee:
+    github: "neutralworking/black-coffee"
+    default_branch: main
+    project_type: "joy"
+    priority_weight: 1
+    scan:
+      commits: true
+      issues: true
+      prs: true
+      tests: false
+      todos: true
+      deploy_health: false
+    autofix: false
+
+  unreal-albion:
+    github: "neutralworking/unreal-albion"
+    default_branch: main
+    project_type: "game"
+    priority_weight: 1
+    scan:
+      commits: true
+      issues: true
+      prs: true
+      tests: false
+      todos: true
+      deploy_health: false
+    autofix: false
+
+  life-archive:
+    github: "neutralworking/life-archive"
+    default_branch: main
+    project_type: "personal"
+    priority_weight: 1
+    scan:
+      commits: true
+      issues: true
+      prs: true
+      tests: false
+      todos: false
+      deploy_health: false
+    autofix: false
