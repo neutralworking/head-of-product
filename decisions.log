@@ -10,3 +10,7 @@
 [2026-05-15T09:15:02Z] [config] [removed kb from repos.yaml] — duplicated chief-scout/kb; charter lists it as archived
 [2026-05-15T09:15:02Z] [github-mcp] [flagged for fix] — Luke says mcp-github.neutralworking.com isn't configured correctly; will address before session-2 scans
 [2026-05-15T09:44:25Z] [github-mcp] [self-hosted MCP dropped] — Luke's call; use REST client (lib/github_client.py) for cross-repo, claude.ai built-in MCP for chat sessions
+[2026-05-15T10:55:06Z] [board] [deployed to https://product.neutralworking.com] — Coolify on NW infra, Dockerfile build pack, basic auth on
+[2026-05-15T10:55:06Z] [board] [Dockerfile chosen over Static/Nixpacks] — Static had no publish-dir field; Nixpacks couldn't auto-detect; Dockerfile is predictable
+[2026-05-15T10:55:06Z] [board] [Traefik service port label fix=80] — Coolify defaulted to port 3000 (Node convention); manually overridden in custom labels
+[2026-05-15T10:55:06Z] [board] [Direction=non-www only] — "Allow www & non-www" generated duplicate Traefik services causing 'cannot link automatically' error

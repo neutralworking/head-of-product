@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-15T07:00:00Z",
+  "generated_at": "2026-05-15T10:55:00Z",
   "projects": [
     {
       "name": "Chief Scout",
@@ -15,8 +15,8 @@
       "repo": "head-of-product",
       "tier": "now",
       "last_touched": "2026-05-15",
-      "next_step": "Deploy board to product.neutralworking.com (Coolify); wire Telegram + GitHub MCP",
-      "blocker": "Luke to create Coolify app + DNS + GitHub MCP fix",
+      "next_step": "Wire Telegram bot (token + chat ID), then first scan + daily digest",
+      "blocker": null,
       "revenue_status": "none"
     },
     {
