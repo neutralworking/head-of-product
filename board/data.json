@@ -1,0 +1,85 @@
+{
+  "generated_at": "2026-05-15T07:00:00Z",
+  "projects": [
+    {
+      "name": "Chief Scout",
+      "repo": "chief-scout",
+      "tier": "now",
+      "last_touched": null,
+      "next_step": "Confirm next ship target toward WC 11 Jun 2026",
+      "blocker": null,
+      "revenue_status": "path"
+    },
+    {
+      "name": "Head of Product",
+      "repo": "head-of-product",
+      "tier": "now",
+      "last_touched": "2026-05-15",
+      "next_step": "Deploy board to product.neutralworking.com (Coolify); wire Telegram + GitHub MCP",
+      "blocker": "Luke to create Coolify app + DNS + GitHub MCP fix",
+      "revenue_status": "none"
+    },
+    {
+      "name": "Soft Power",
+      "repo": "soft-power",
+      "tier": "now",
+      "last_touched": null,
+      "next_step": "Confirm outreach cadence and reply tracking surface",
+      "blocker": null,
+      "revenue_status": "path"
+    },
+    {
+      "name": "Kickoff Clash",
+      "repo": "kickoff-clash",
+      "tier": "next",
+      "last_touched": null,
+      "next_step": "Stand up Steam wishlist page (cheapest first revenue move). V1 = full run to World Cup, Balatro-parity minus Challenges.",
+      "blocker": null,
+      "revenue_status": "path"
+    },
+    {
+      "name": "NW portfolio",
+      "repo": "neutralworking",
+      "tier": "next",
+      "last_touched": null,
+      "next_step": "Decide lead-gen pillar (fractional PO / courses / templates) before launch",
+      "blocker": "Pillar choice",
+      "revenue_status": "path"
+    },
+    {
+      "name": "The Trap",
+      "repo": "iCloud + Todoist",
+      "tier": "next",
+      "last_touched": null,
+      "next_step": "Write the episode-one pilot. Confirm publish surface (Substack vs. Royal Road) before drafting.",
+      "blocker": null,
+      "revenue_status": "path"
+    },
+    {
+      "name": "n8n-platform",
+      "repo": "n8n-platform",
+      "tier": "later",
+      "last_touched": null,
+      "next_step": "Confirm uptime is good enough for Tidbits revival",
+      "blocker": null,
+      "revenue_status": "none"
+    },
+    {
+      "name": "Crumble.cz",
+      "repo": "crumble",
+      "tier": "later",
+      "last_touched": null,
+      "next_step": "—",
+      "blocker": "Out of charter",
+      "revenue_status": "none"
+    }
+  ],
+  "revenue": [
+    { "project": "Chief Scout", "monthly_gbp": 0, "trajectory": "flat", "cost_gbp": null },
+    { "project": "Soft Power", "monthly_gbp": 0, "trajectory": "flat", "cost_gbp": null },
+    { "project": "Kickoff Clash", "monthly_gbp": 0, "trajectory": "flat", "cost_gbp": null },
+    { "project": "NW portfolio", "monthly_gbp": 0, "trajectory": "flat", "cost_gbp": null },
+    { "project": "The Trap", "monthly_gbp": 0, "trajectory": "flat", "cost_gbp": null }
+  ],
+  "opportunities": []
+}

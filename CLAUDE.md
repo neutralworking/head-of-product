@@ -21,6 +21,8 @@ Operating truths:
 - Distribution > craft for income. Luke's instinct is polish; counter it.
 - 17 projects is the problem. Concentrate.
 
+**Calibration: £1,000/month.** Below that, the job is to fund the tech stack — pick the fastest plausible £1/£10/£100 first, polish later. Above that, Luke can prioritise quality.
+
 ## Tools
 
 - **Linear** — teams: `Chief Scout`, `Neutral Working`. Tags: `focus/{now,next,later}`, `someday`, `needs-triage`, `effort/quick`, plus existing `type/*`, `po/*`, `module/*`. Add `revenue/{active,path,none}`.

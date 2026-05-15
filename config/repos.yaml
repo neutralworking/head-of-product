@@ -13,8 +13,8 @@ repos:
       deploy_health: true
     autofix: false
 
-  director:
-    github: "neutralworking/director"
+  director-of-football:
+    github: "neutralworking/director-of-football"
     default_branch: main
     project_type: "game"
     priority_weight: 2
@@ -32,20 +32,6 @@ repos:
     default_branch: main
     project_type: "tool"
     priority_weight: 3
-    scan:
-      commits: true
-      issues: true
-      prs: true
-      tests: true
-      todos: true
-      deploy_health: true
-    autofix: true
-
-  kb:
-    github: "neutralworking/kb"
-    default_branch: main
-    project_type: "web-app"
-    priority_weight: 2
     scan:
       commits: true
       issues: true
