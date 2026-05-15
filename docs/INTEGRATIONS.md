@@ -4,7 +4,8 @@ Current status of MCPs, APIs, and external services HoP relies on. Update as sta
 
 | Integration | Purpose | Auth / endpoint | Status | Notes |
 |---|---|---|---|---|
-| GitHub MCP | Read repos, PRs, issues, commits | `mcp-github.neutralworking.com` (self-hosted) | **misconfigured — fix planned** | Luke flagged the server wasn't configured correctly. Action: confirm host, auth (PAT scopes: repo, read:org, workflow), verify against all 17 NW repos. Until fixed, fall back to GitHub MCP via claude.ai (currently scoped to `head-of-product` only in this environment) or direct REST via `lib/github_client.py`. |
+| GitHub MCP (self-hosted) | — | `mcp-github.neutralworking.com` | **dropped** | Luke's call (session 1). Self-hosted MCP retired; not worth standing up for one user. Use REST client + claude.ai built-in MCP instead. |
+| GitHub MCP (claude.ai built-in) | Repo browsing, PR/issue read+write from chat | claude.ai integration | working | Repo-scoped to `neutralworking/head-of-product` in this remote environment. For cross-repo reads HoP automation uses the REST client. |
 | GitHub REST API | Deterministic repo data (commits, issues, PRs, workflow runs, TODO search) | `https://api.github.com` + `GITHUB_TOKEN` | working | Used by `lib/github_client.py`. Code search has a per-token rate limit — TODO cache has an 8h TTL. |
 | Linear MCP | Track tickets across `Chief Scout` and `Neutral Working` teams | claude.ai built-in | working | Not yet wired to HoP automation (session-1 don't list). Tags to use: `focus/{now,next,later}`, `someday`, `needs-triage`, `effort/quick`, `revenue/{active,path,none}`, plus existing `type/*`, `po/*`, `module/*`. |
 | Todoist MCP | Daily actionables, digest delivery | claude.ai built-in | working | Daily digest target: `HoP morning brief — YYYY-MM-DD` at 06:30 Europe/Prague. Linear → Todoist bridge is an early priority. |
@@ -21,8 +22,7 @@ Current status of MCPs, APIs, and external services HoP relies on. Update as sta
 
 ## Known issues
 
-- **GitHub MCP at `mcp-github.neutralworking.com` is not configured correctly.** Luke flagged this; fix planned. Need: confirm host is reachable, PAT scopes (repo, read:org, workflow), test against each NW repo. Until fixed, fall back to the REST client (`lib/github_client.py`) or the built-in GitHub MCP via claude.ai (currently repo-scoped to `head-of-product` only in this environment).
-- **Repo MCP scope** is restricted to `neutralworking/head-of-product` in this remote execution environment. Other repos are read-only via GitHub MCP search/contents tools.
+- **Repo MCP scope** is restricted to `neutralworking/head-of-product` in this remote execution environment. Cross-repo reads use the REST client.
 - **Ollama is not available** in remote/web sessions. Tasks routed to Ollama will fail until run on Luke's machine or the server.
 
 ## To wire (post session-1)

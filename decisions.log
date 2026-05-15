@@ -9,3 +9,4 @@
 [2026-05-15T09:15:02Z] [config] [renamed director → director-of-football in repos.yaml] — matches charter; canonical name confirmed
 [2026-05-15T09:15:02Z] [config] [removed kb from repos.yaml] — duplicated chief-scout/kb; charter lists it as archived
 [2026-05-15T09:15:02Z] [github-mcp] [flagged for fix] — Luke says mcp-github.neutralworking.com isn't configured correctly; will address before session-2 scans
+[2026-05-15T09:44:25Z] [github-mcp] [self-hosted MCP dropped] — Luke's call; use REST client (lib/github_client.py) for cross-repo, claude.ai built-in MCP for chat sessions
