@@ -18,10 +18,14 @@ python3 -m http.server 8000
 
 ## Deploy
 
-Not yet deployed. See `docs/BOARD.md` open decisions:
-- Host (Cloudflare Pages recommended)
-- Subdomain (`hop.neutralworking.com` recommended)
-- Auth (Cloudflare Access / HTTP Basic recommended)
+Target: `product.neutralworking.com` via Coolify on NW infra.
+
+- Host: Coolify (same instance as `neutralworking.com`)
+- Subdomain: `product.neutralworking.com`
+- Auth: HTTP Basic via Coolify reverse-proxy middleware
+- Update flow: push to `main` → Coolify pulls and redeploys
+
+Not yet deployed — pending Luke creating the Coolify app + DNS record (see `docs/BOARD.md`).
 
 ## Updating data
 

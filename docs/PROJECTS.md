@@ -30,9 +30,9 @@ Legend for empty cells: `—` means none / unknown / not applicable. `?` means H
 
 | Name | Repo | Tier | Done | Monetisation | Last touched | Next step | Blocker | Source | Revenue status |
 |---|---|---|---|---|---|---|---|---|---|
-| Kickoff Clash | `kickoff-clash` | next | v1 criteria TBD. | Steam paid ($10–15, Balatro analog). Itch demo + Steam wishlist page is the cheapest first revenue move on the portfolio. | ? | Define v1 done; stand up Steam wishlist page | v1 done definition | GitHub | path |
+| Kickoff Clash | `kickoff-clash` | next | Full run playable from start to World Cup. Feature parity with current Balatro (minus Challenges). | Steam paid ($10–15, Balatro analog). Itch demo + Steam wishlist page is the cheapest first revenue move on the portfolio. | ? | Stand up Steam wishlist page; map gap to v1 | — | GitHub | path |
 | NW portfolio | `neutralworking` | next | Multi-project homepage live. | Lead gen for fractional PO / courses / templates. Decide what before launch. | ? | Decide lead-gen pillar before going live | Pillar choice | GitHub | path |
-| The Trap | iCloud + Todoist | next | TBD | Substack serial / Royal Road / self-publish. | ? | Define "done" for first publishable unit | Done definition | iCloud + Todoist | path |
+| The Trap | iCloud + Todoist | next | Episode-one pilot written. | Substack serial / Royal Road / self-publish. | ? | Confirm publish surface for the pilot (Substack vs. Royal Road) | — | iCloud + Todoist | path |
 
 ## Active — `later`
 
@@ -66,9 +66,7 @@ Legend for empty cells: `—` means none / unknown / not applicable. `?` means H
 
 ---
 
-## Open questions
+## Notes
 
 - `Last touched` is unknown across the board until HoP runs a scan against the GitHub MCP (deferred per session-1 "don't wire automation").
-- `Director of Football` charter listing names the repo `director-of-football`, but `config/repos.yaml` currently has `director`. Confirm canonical name.
-- `kb` is listed as archived here but still present in `config/repos.yaml` — config cleanup pending.
-- The Trap, Kickoff Clash v1 — done definitions are open asks for Luke.
+- `config/repos.yaml` cleaned up in session 1: `director` renamed to `director-of-football`, `kb` removed (charter lists it as archived). Other charter additions (kickoff-clash, n8n-platform, black-coffee, unreal-albion, life-archive) will land when scanning is wired in session 2.

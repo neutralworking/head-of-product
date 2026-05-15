@@ -1,1 +1,11 @@
 [2026-05-15T08:51:16Z] [hop] [initialised] — charter accepted
+[2026-05-15T09:15:02Z] [board] [host=Coolify@neutralworking.com, subdomain=product.neutralworking.com] — Luke owns Coolify on NW infra; one host, one deploy path
+[2026-05-15T09:15:02Z] [board] [auth=HTTP Basic via Coolify reverse-proxy] — single user, simplest option, no extra service
+[2026-05-15T09:15:02Z] [board] [data updates auto-merge to main] — Luke's call; routine refreshes don't need eyeballs; project add/kill stays as PRs
+[2026-05-15T09:15:02Z] [notifications] [Telegram chosen over Slack] — personal push channel; Discord stays as archive
+[2026-05-15T09:15:02Z] [income] [calibration=£1000/mo] — below: fund the stack; above: Luke can prioritise quality
+[2026-05-15T09:15:02Z] [the-trap] [v1 done = episode-one pilot] — confirmed by Luke
+[2026-05-15T09:15:02Z] [kickoff-clash] [v1 done = full run to World Cup, Balatro-parity minus Challenges] — confirmed by Luke
+[2026-05-15T09:15:02Z] [config] [renamed director → director-of-football in repos.yaml] — matches charter; canonical name confirmed
+[2026-05-15T09:15:02Z] [config] [removed kb from repos.yaml] — duplicated chief-scout/kb; charter lists it as archived
+[2026-05-15T09:15:02Z] [github-mcp] [flagged for fix] — Luke says mcp-github.neutralworking.com isn't configured correctly; will address before session-2 scans

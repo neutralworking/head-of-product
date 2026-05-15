@@ -15,8 +15,8 @@
       "repo": "head-of-product",
       "tier": "now",
       "last_touched": "2026-05-15",
-      "next_step": "Hand board URL to Luke; await board host + auth decision",
-      "blocker": "Hosting + auth decisions (see BOARD.md)",
+      "next_step": "Deploy board to product.neutralworking.com (Coolify); wire Telegram + GitHub MCP",
+      "blocker": "Luke to create Coolify app + DNS + GitHub MCP fix",
       "revenue_status": "none"
     },
     {
@@ -33,8 +33,8 @@
       "repo": "kickoff-clash",
       "tier": "next",
       "last_touched": null,
-      "next_step": "Define v1 done; stand up Steam wishlist page (cheapest first revenue move)",
-      "blocker": "v1 done definition",
+      "next_step": "Stand up Steam wishlist page (cheapest first revenue move). V1 = full run to World Cup, Balatro-parity minus Challenges.",
+      "blocker": null,
       "revenue_status": "path"
     },
     {
@@ -51,8 +51,8 @@
       "repo": "iCloud + Todoist",
       "tier": "next",
       "last_touched": null,
-      "next_step": "Define done for first publishable unit",
-      "blocker": "Done definition",
+      "next_step": "Write the episode-one pilot. Confirm publish surface (Substack vs. Royal Road) before drafting.",
+      "blocker": null,
       "revenue_status": "path"
     },
     {

@@ -2,22 +2,23 @@
 
 The board is the one-glance surface for portfolio state. Three panels: active projects, revenue snapshot, top opportunities. Mobile-first.
 
-This doc records the architecture decisions for session 1. Each section gives a recommendation, the reasoning, and the alternatives considered. Items marked **ASK** need Luke's sign-off before going to production.
+This doc records the architecture decisions for session 1. Each section gives the decision, the reasoning, and the alternatives considered.
 
 ---
 
-## 1. Hosting — **`hop.neutralworking.com` subdomain**
+## 1. Hosting — **`product.neutralworking.com`, Coolify on NW infra**
 
-**Recommendation:** dedicated subdomain.
+**Decision:** dedicated subdomain `product.neutralworking.com`, deployed via Coolify alongside `neutralworking.com`.
 
 Why:
-- `neutralworking.com` is (or will be) the public-facing portfolio / lead-gen page. The board contains revenue figures and kill candidates — not for that audience.
-- A subdomain lets us put auth in front of the whole thing at the edge without complicating the public site.
-- Easier to swap hosts later (Cloudflare Pages, Netlify, Vercel) without breaking the public site's deploy.
+- `neutralworking.com` is the public-facing portfolio / lead-gen page. The board contains revenue figures and kill candidates — not for that audience.
+- A subdomain lets us put auth in front of the whole thing without complicating the public site.
+- Coolify is already set up on Luke's infra for `neutralworking.com`. One host, one deploy story, no extra bills.
+- Easy to swap or front with Cloudflare later if needed.
 
-Alternative considered: `neutralworking.com/hop` path. Rejected — couples the deploy/auth surface to the public site and makes it harder to lock down.
+Alternative considered: Cloudflare Pages + Access. Rejected — adds an extra surface; Coolify is already paid for.
 
-**ASK:** confirm Luke is happy with `hop.neutralworking.com` and that DNS is his to change.
+Alternative considered: `neutralworking.com/product` path. Rejected — couples the deploy/auth surface to the public site and makes it harder to lock down.
 
 ---
 
@@ -35,20 +36,18 @@ Alternative considered: Next.js / Astro. Rejected — adds a build step and Node
 
 ---
 
-## 3. Auth — **HTTP Basic at the edge** (interim) → signed link (later)
+## 3. Auth — **HTTP Basic via Coolify reverse proxy** (interim)
 
-**Recommendation:** start with HTTP Basic auth via Cloudflare Access or a Worker (single user, single password in an env var). Move to signed magic links once there's a second consumer.
+**Decision:** Coolify's built-in basic-auth (Traefik middleware) in front of the static site. Single user, password in Coolify's secret store.
 
 Why:
 - Single user. HTTP Basic is the smallest thing that works.
-- Edge auth keeps the static deploy dumb.
-- Magic links are nicer UX but unnecessary for one person.
+- Coolify exposes this as config — no extra service to run.
+- Move to magic links / OAuth only when there's a second consumer (none planned).
 
 Alternative considered:
 - Fully public. Rejected — revenue figures, kill recommendations, and personal project state are not for public consumption.
 - Full OAuth. Rejected — over-engineered for a one-user dashboard.
-
-**ASK:** Cloudflare vs. another host? If not Cloudflare, the auth mechanism may need to change.
 
 ---
 
@@ -92,25 +91,22 @@ Schema sketch (`board/data.json`):
 
 ---
 
-## 5. Update mechanism — **HoP → `data.json` → git push → host rebuilds**
+## 5. Update mechanism — **HoP → `data.json` → git push → Coolify rebuilds**
 
-**Recommendation:** the HoP Python pipeline writes `board/data.json`, commits it on a generated branch, and either auto-merges to `main` (cheap) or opens a PR (auditable). The host (Cloudflare Pages / Netlify) rebuilds on push to `main`.
+**Decision:** the HoP pipeline writes `board/data.json`, commits to a branch, and **auto-merges to `main`** for data updates. Coolify pulls and redeploys on push to `main`. Project additions / kills / scope changes still open as PRs for review.
 
 Why:
 - Same git audit trail as everything else.
-- Failure modes are visible (a bad PR is a bad PR, not a silently broken dashboard).
+- Auto-merge for routine data refreshes — they shouldn't need eyeballs.
+- PRs reserved for state changes Luke should see (new project, kill recommendation, tier shift).
 - No webhook plumbing — push triggers the rebuild.
 
-Cadence: tied to scan cadence (currently every 4h per systemd timer; will be slower for the board — once daily is probably enough until something is moving fast).
-
-**ASK:** auto-merge or PR-per-update? Auto-merge is simpler; PRs give Luke a daily diff to glance at. Default recommendation: auto-merge for the board update, separate PRs for project additions/kills.
+Cadence: once daily for now (matches the digest). Bump to hourly only if something is actually moving fast.
 
 ---
 
-## Open decisions (none blocking the MVP)
+## Open decisions
 
-1. Host choice — Cloudflare Pages vs. Netlify vs. Vercel. Recommendation: **Cloudflare Pages** (Luke already uses Cloudflare for DNS, Access for auth is one click).
-2. Auto-merge vs. PR for `data.json` updates.
-3. Branding — the board can be deliberately ugly (operational tool) or styled to match NW.
+1. Branding — deliberately ugly operational tool, or styled to match NW? Defer until Luke sees the MVP.
 
-Defer until after Luke sees the MVP.
+Everything else is locked.
