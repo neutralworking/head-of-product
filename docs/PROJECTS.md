@@ -31,7 +31,7 @@ Legend for empty cells: `—` means none / unknown / not applicable. `?` means H
 | Name | Repo | Tier | Done | Monetisation | Last touched | Next step | Blocker | Source | Revenue status |
 |---|---|---|---|---|---|---|---|---|---|
 | Kickoff Clash | `kickoff-clash` | next | Full game playable AND enjoyable end-to-end (run start → World Cup). Polish (UI, cards, depth, music) comes after the loop works. | Steam paid ($10–15, Balatro analog). Steam wishlist page **deferred** until the loop is enjoyable — no premature listing. | ? | Get the core run loop playable + enjoyable | Gameplay loop | GitHub | path |
-| NW portfolio | `neutralworking` | next | Multi-project homepage live. | Lead gen for fractional PO / courses / templates. Decide what before launch. | ? | Decide lead-gen pillar before going live | Pillar choice | GitHub | path |
+| NW portfolio | `neutralworking` | next | Fractional PO offering page live: positioning, service shapes, target business types, proof, CTA. | **Pillar locked: fractional PO offering.** Lead gen for embedded / advisory retainer / project-shaped engagements. | ? | Draft positioning + 2–3 service shapes + target business types | — | GitHub | path |
 | The Trap | iCloud + Todoist | next | Episode-one pilot written. | Substack serial / Royal Road / self-publish. | ? | Confirm publish surface for the pilot (Substack vs. Royal Road) | — | iCloud + Todoist | path |
 
 ## Active — `later`
@@ -61,17 +61,17 @@ Rested 2026-05-15 by Luke. Different from "parked" in that we're not pretending 
 | Name | Repo | Done | Monetisation | Last touched | Next step | Blocker | Source | Revenue status |
 |---|---|---|---|---|---|---|---|---|
 | Shadow Session | `wellness-session` | — | Paid iOS app. | ? | None | Not in focus (kept per Luke 2026-05-15) | GitHub | path |
-| Black Coffee | `black-coffee` | — | None. Joy candidate. | ? | None | Joy slot — confirm keep/kill | GitHub | none |
 | Life Archive | `life-archive` | — | None. Personal. | ? | Hands off (per charter) | — | GitHub | none |
 
 ---
 
-## Archived (session 1)
+## Archived
 
-| Name | Repo | Reason |
-|---|---|---|
-| NW marketing site (old) | `neutralworking.github.io` | Superseded by `neutralworking` |
-| KB | `kb` | Duplicate of `chief-scout/kb` |
+| Name | Repo | Reason | Date |
+|---|---|---|---|
+| NW marketing site (old) | `neutralworking.github.io` | Superseded by `neutralworking` | 2026-05-15 (session 1) |
+| KB | `kb` | Duplicate of `chief-scout/kb` | 2026-05-15 (session 1) |
+| Black Coffee | `black-coffee` | Joy candidate with no income path; killed to free mental slot per Luke | 2026-05-15 |
 
 ---
 
