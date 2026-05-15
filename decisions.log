@@ -14,3 +14,7 @@
 [2026-05-15T10:55:06Z] [board] [Dockerfile chosen over Static/Nixpacks] — Static had no publish-dir field; Nixpacks couldn't auto-detect; Dockerfile is predictable
 [2026-05-15T10:55:06Z] [board] [Traefik service port label fix=80] — Coolify defaulted to port 3000 (Node convention); manually overridden in custom labels
 [2026-05-15T10:55:06Z] [board] [Direction=non-www only] — "Allow www & non-www" generated duplicate Traefik services causing 'cannot link automatically' error
+[2026-05-15T12:11:10Z] [session-2] [Telegram notifier wired] — lib/telegram_notifier.py; HTML format; primary push channel
+[2026-05-15T12:11:10Z] [session-2] [Todoist client wired] — lib/todoist_client.py; daily "HoP morning brief" task at 06:30 Europe/Prague
+[2026-05-15T12:11:10Z] [session-2] [Discord kept as archive] — runs after Telegram + Todoist in pm_aggregator
+[2026-05-15T12:11:10Z] [config] [added charter repos to repos.yaml] — kickoff-clash, n8n-platform, black-coffee, unreal-albion, life-archive (read-only, autofix off)

@@ -256,7 +256,23 @@ async def produce_digest(dry_run: bool = False) -> dict | None:
     except Exception as exc:
         logger.error("Failed to push digest PR: %s", exc)
 
-    # Send to Discord (include PR link)
+    # Send to Telegram (primary push)
+    try:
+        from lib.telegram_notifier import send_digest as send_telegram_digest
+        await send_telegram_digest(digest, pr_url=pr_url)
+        logger.info("Digest sent to Telegram")
+    except Exception as exc:
+        logger.error("Failed to send digest to Telegram: %s", exc)
+
+    # Create Todoist morning-brief task
+    try:
+        from lib.todoist_client import send_digest_task
+        await send_digest_task(digest, pr_url=pr_url)
+        logger.info("Digest task created in Todoist")
+    except Exception as exc:
+        logger.error("Failed to create Todoist digest task: %s", exc)
+
+    # Send to Discord (archive)
     try:
         from lib.discord_notifier import send_digest as send_discord_digest
         await send_discord_digest(digest, pr_url=pr_url)
