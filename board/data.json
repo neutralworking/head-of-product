@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-05-15T13:00:00Z",
+  "generated_at": "2026-05-15T13:15:00Z",
   "projects": [
     {
       "name": "Chief Scout",
@@ -42,8 +42,8 @@
       "repo": "neutralworking",
       "tier": "next",
       "last_touched": null,
-      "next_step": "Decide lead-gen pillar (fractional PO / courses / templates) before launch",
-      "blocker": "Pillar choice",
+      "next_step": "Pillar locked: fractional PO offering. Draft positioning, service shapes, target business types",
+      "blocker": null,
       "revenue_status": "path"
     },
     {

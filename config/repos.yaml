@@ -153,20 +153,6 @@ repos:
       deploy_health: true
     autofix: false
 
-  black-coffee:
-    github: "neutralworking/black-coffee"
-    default_branch: main
-    project_type: "joy"
-    priority_weight: 1
-    scan:
-      commits: true
-      issues: true
-      prs: true
-      tests: false
-      todos: true
-      deploy_health: false
-    autofix: false
-
   unreal-albion:
     github: "neutralworking/unreal-albion"
     default_branch: main
