@@ -23,7 +23,7 @@ Legend for empty cells: `—` means none / unknown / not applicable. `?` means H
 | Name | Repo | Tier | Done | Monetisation | Last touched | Next step | Blocker | Source | Revenue status |
 |---|---|---|---|---|---|---|---|---|---|
 | Chief Scout | `chief-scout` | now | A product Luke would show people. World Cup, 11 Jun 2026. | Newsletter (kb→Substack), affiliate, B2B SaaS long-term. | ? | Confirm next ship target | ? | GitHub | path |
-| Head of Product | `head-of-product` | now | Board live, daily digest reliable. | Productisable later. Defer. | 2026-05-15 | Build static board MVP, hand URL to Luke | Hosting + auth decisions | GitHub | none |
+| Head of Product | `head-of-product` | now | Board live, daily digest reliable. | Productisable later. Defer. | 2026-05-15 | Wire Telegram bot, then first scan + daily digest | — | GitHub | none |
 | Soft Power | `soft-power` | now | Outreach running, replies tracked. | Script PDF, crowdfund production, Substack. | ? | Confirm outreach cadence + reply tracking surface | ? | GitHub | path |
 
 ## Active — `next`
